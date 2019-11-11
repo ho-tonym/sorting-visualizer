@@ -1,6 +1,8 @@
 import React from 'react';
 import './sort.min.css'
 import { randomInt, testSortingAlgorithms } from './functions/functions'
+import { mergeSort } from './functions/mergeFunction'
+import { Navbar, Nav, Button } from 'react-bootstrap'
 
 const ARRAY_BARS_COUNT = 50;
 const BAR_COLOR = "#2ad19d";
@@ -27,10 +29,11 @@ class SortVisualizer extends React.Component {
   }
 
   render() {
+    const { array } = this.state
     return (
       <>
         <div className="sort-visualizer">
-          {this.state.array.map((value, id) => (
+          {array.map((value, id) => (
             <div
               key={id}
               style={{
@@ -40,8 +43,14 @@ class SortVisualizer extends React.Component {
             </div>
           ))}
         </div>
-        <button className="reset-button" onClick={() => this.resetArray()}>RESET ARRAY</button>
-        <button className="test-merge-button" onClick={() => testSortingAlgorithms()}>TEST EQUALITY</button>
+        <Navbar fixed="bottom" bg="dark" expand="lg">
+          <Button variant="primary" onClick={() => this.resetArray()}>Reset Array</Button>
+          <Button variant="primary" onClick={() => {
+            this.setState({array: mergeSort(array)})
+          }}>Merge</Button>
+          <Button variant="primary" onClick={() => testSortingAlgorithms()}>Test Function</Button>
+        </Navbar>
+
       </>
     );
   }
