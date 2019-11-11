@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './sort.min.css'
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -20,7 +20,7 @@ class SortVisualizer extends React.Component {
   resetArray() {
     const array = [];
     for (let i = 0; i < 50; i++) {
-      array.push(randomInt(5, 730));
+      array.push(randomInt(5, 400));
     }
     this.setState({array});
     console.log(array)
@@ -29,12 +29,13 @@ class SortVisualizer extends React.Component {
   render() {
     return (
       <div className="sort-visualizer">
-        <h1>YEET</h1>
         {this.state.array.map((value, id) => (
           <div
             key={id}
->
-            {value}
+            style={{
+              backgroundColor: "#2ad19d",
+              height: `${value}px`,
+            }}>
           </div>
         ))}
       </div>
