@@ -28,17 +28,20 @@ class SortVisualizer extends React.Component {
 
   render() {
     return (
-      <div className="sort-visualizer">
-        {this.state.array.map((value, id) => (
-          <div
-            key={id}
-            style={{
-              backgroundColor: "#2ad19d",
-              height: `${value}px`,
-            }}>
-          </div>
-        ))}
-      </div>
+      <>
+        <div className="sort-visualizer">
+          {this.state.array.map((value, id) => (
+            <div
+              key={id}
+              style={{
+                backgroundColor: "#2ad19d",
+                height: `${value}px`,
+              }}>
+            </div>
+          ))}
+        </div>
+        <button className="reset-button" onClick={() => this.resetArray()}>RESET ARRAY</button>
+      </>
     );
   }
 }
