@@ -28,8 +28,15 @@ class SortVisualizer extends React.Component {
 
   render() {
     return (
-      <div className="array-container">
+      <div className="sort-visualizer">
         <h1>YEET</h1>
+        {this.state.array.map((value, id) => (
+          <div
+            key={id}
+>
+            {value}
+          </div>
+        ))}
       </div>
     );
   }
