@@ -1,8 +1,6 @@
 import React from 'react';
 import './sort.min.css'
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+import { randomInt, testSortingAlgorithms } from './functions/functions'
 
 class SortVisualizer extends React.Component {
   constructor(props) {
@@ -23,7 +21,6 @@ class SortVisualizer extends React.Component {
       array.push(randomInt(5, 400));
     }
     this.setState({array});
-    console.log(array)
   }
 
   render() {
@@ -41,6 +38,7 @@ class SortVisualizer extends React.Component {
           ))}
         </div>
         <button className="reset-button" onClick={() => this.resetArray()}>RESET ARRAY</button>
+        <button className="test-merge-button" onClick={() => testSortingAlgorithms()}>TEST EQUALITY</button>
       </>
     );
   }
