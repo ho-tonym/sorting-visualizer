@@ -2,6 +2,9 @@ import React from 'react';
 import './sort.min.css'
 import { randomInt, testSortingAlgorithms } from './functions/functions'
 
+const ARRAY_BARS_COUNT = 50;
+const BAR_COLOR = "#2ad19d";
+
 class SortVisualizer extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +20,7 @@ class SortVisualizer extends React.Component {
 
   resetArray() {
     const array = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < ARRAY_BARS_COUNT; i++) {
       array.push(randomInt(5, 400));
     }
     this.setState({array});
@@ -31,7 +34,7 @@ class SortVisualizer extends React.Component {
             <div
               key={id}
               style={{
-                backgroundColor: "#2ad19d",
+                backgroundColor: BAR_COLOR,
                 height: `${value}px`,
               }}>
             </div>
