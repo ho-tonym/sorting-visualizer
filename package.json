@@ -1,6 +1,8 @@
 {
   "name": "sorting-visualizer",
+  "author": "Tony Ho",
   "version": "0.1.0",
+  "description": "Sorting visualizer!",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",

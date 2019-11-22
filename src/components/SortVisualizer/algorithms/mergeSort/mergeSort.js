@@ -1,6 +1,9 @@
+import { randomInt, arraysEqual } from '../helperFunctions'
+
 export const mergeSort = array => {
   const arrayCopy = [...array];
   if (arrayCopy.length <= 1) {
+    // console.log(array)
     return array;
   }
   const length = arrayCopy.length;
@@ -24,3 +27,18 @@ const mergeHelper = (left, right) => {
   }
   return results.concat(left, right);
 };
+
+
+
+export function mergeTestSortingAlgorithms() {
+  for (let i = 0; i < 100; i++) {
+    const array = [];
+    const length = randomInt(1, 1000);
+    for (let i = 0; i < length; i++) {
+      array.push(randomInt(-1000, 1000));
+    }
+    const jsMergeSortFunc = array.slice().sort((a, b) => a - b);
+    const myMergeSortFunc = mergeSort(array.slice());
+    console.log(arraysEqual(jsMergeSortFunc, myMergeSortFunc));
+  }
+}
