@@ -8,7 +8,7 @@ import { Navbar, Button } from 'react-bootstrap'
 const ARRAY_BARS_COUNT = 10
 const BAR_COLOR = "#2ad19d"
 // const BAR_COLOR = "#ff9f38"
-const ANIMTION_TIME = 1000
+const ANIMTION_TIME = 10
 // ADD IN FINISHED COLOR
 
 
@@ -84,7 +84,7 @@ class SortVisualizer extends React.Component {
       this.setState({array, permutationsToExecute: array, isSorted: false})
   }
 
-  swap = (j, k) => {
+  swapAnimation = (j, k) => {
     const tempArray = this.state.array
     const tempElement = tempArray[j]
     console.log(this.state.permutationsToExecute)
@@ -102,10 +102,17 @@ class SortVisualizer extends React.Component {
     }))
   }
 
+  swap = (array, j, k) => {
+    const tempArray = array[j];
+    array[j] = array[k];
+    array[k] = tempArray;
+  }
+
+
   executeAnimation = () => {
         // console.log(this.state.permutationsToExecute)
     const {permutationsToExecute} = this.state
-    permutationsToExecute.length > 0 ? this.swap(permutationsToExecute[0][0], permutationsToExecute[0][1]) :
+    permutationsToExecute.length > 0 ? this.swapAnimation(permutationsToExecute[0][0], permutationsToExecute[0][1]) :
     this.setState({
       isSorted: true
     })
@@ -118,6 +125,7 @@ class SortVisualizer extends React.Component {
     for (let i = 0; i < arr.length; i++) {
       for (let j = 0, stop = arr.length - i; j < stop; j++) {
         if (arr[j] > arr[j + 1]) {
+          this.swap(arr, j, j + 1);
           permutationsToExecute.push([j, j+1])
         }
       }
