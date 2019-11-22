@@ -5,7 +5,7 @@ import { mergeSort, mergeTestSortingAlgorithms } from './algorithms/mergeSort/me
 import { bubbleSort } from './algorithms/bubbleSort/bubbleSort'
 import { Navbar, Button } from 'react-bootstrap'
 
-const ARRAY_BARS_COUNT = 50
+const ARRAY_BARS_COUNT = 10
 const BAR_COLOR = "#2ad19d"
 // const BAR_COLOR = "#ff9f38"
 
