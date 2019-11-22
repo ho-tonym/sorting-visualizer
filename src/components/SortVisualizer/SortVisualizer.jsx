@@ -87,11 +87,14 @@ class SortVisualizer extends React.Component {
   swap = (j, k) => {
     const tempArray = this.state.array
     const tempElement = tempArray[j]
+    console.log(this.state.permutationsToExecute)
+    console.log(j, k)
     console.log("state  " + this.state.array)
     tempArray[j] = tempArray[k];
     tempArray[k] = tempElement;
 
     console.log("tstate " + tempArray)
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 
     this.setState((prevState) => ({
       array: tempArray,
