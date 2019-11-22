@@ -29,12 +29,10 @@ class SortVisualizer extends React.Component {
   componentDidMount() {
     this.resetArray()
   }
-
-  componentDidUpdate(prevProps, prevState){
-    if (this.state.isSorted){
-      clearInterval(this.interval);
-    }
-  }
+// 
+//   componentDidUpdate(prevProps, prevState){
+// console.log(this.state)
+//   }
 
   resetArray() {
     const array = []
@@ -45,7 +43,8 @@ class SortVisualizer extends React.Component {
         array,
         permutationsToExecute: array,
         isSorted: false,
-        isRunning: false
+        isRunning: false,
+        comparedValues: []
       })
   }
 
@@ -60,7 +59,16 @@ class SortVisualizer extends React.Component {
       array: tempArray,
       permutationsToExecute: prevState.permutationsToExecute.slice(1),
       comparedValues: [j,k]
-    }))
+    }), () =>{
+      if (this.state.permutationsToExecute <= 0){
+        clearInterval(this.interval);
+        this.setState({
+          isSorted: true,
+          isRunning: false,
+          comparedValues: []
+        })
+      }
+    })
   }
 
   swap = (array, j, k) => {
@@ -73,11 +81,17 @@ class SortVisualizer extends React.Component {
   executeAnimation = () => {
         // console.log(this.state.permutationsToExecute)
     const {permutationsToExecute} = this.state
-    permutationsToExecute.length > 0 ? this.swapAnimation(permutationsToExecute[0][0], permutationsToExecute[0][1]) :
-    this.setState({
-      isSorted: true,
-      isRunning: true,
-    })
+    if(permutationsToExecute.length > 0){
+        this.swapAnimation(permutationsToExecute[0][0], permutationsToExecute[0][1])
+        this.setState({
+          isRunning: true,
+        })
+      }
+    else{
+      this.setState({
+        isRunning: false,
+      })
+    }
   }
 // if we using this incomponent we need arrow functions
   bubbleSort = (arr) => {
@@ -101,14 +115,14 @@ class SortVisualizer extends React.Component {
   }
 
   pauseResume = () => {
-    this.state.isRunning ? this.interval = setInterval(this.executeAnimation, ANIMTION_TIME) : clearInterval(this.interval);
-    this.setState((prevState) => ({
-      isRunning: !prevState.isRunning
-    }))
+    // this.state.isRunning ? this.interval = setInterval(this.executeAnimation, ANIMTION_TIME) : clearInterval(this.interval);
+    // this.setState((prevState) => ({
+    //   isRunning: !prevState.isRunning
+    // }))
   }
 
   render() {
-    const { array, comparedValues, isRunning } = this.state
+    const { array, comparedValues, isRunning, isSorted } = this.state
     return (
       <>
         <div className="sort-visualizer">
@@ -118,8 +132,12 @@ class SortVisualizer extends React.Component {
                 key={id}
                 style={{
                   backgroundColor:
-                    `${isRunning ? BAR_COLOR : id === comparedValues[0] || id === comparedValues[1] ? BAR_COMPARE_COLOR : BAR_COLOR}`
-                  ,
+                  `${
+                    !isRunning ? BAR_COLOR :
+                      isSorted ? BAR_DONE_COLOR :
+                      id === comparedValues[0] || id === comparedValues[1] ? BAR_COMPARE_COLOR
+                      : BAR_COLOR
+                    }`,
                   height: `${value}px`,
                 }}>
               </div>
