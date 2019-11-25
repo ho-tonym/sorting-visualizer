@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Slider from 'rc-slider/lib/Slider';
 import 'rc-slider/assets/index.css';
 import { useStateValue } from '../../../MyProvider'
@@ -14,25 +14,16 @@ export const SliderContainer = () => {
   const { sliderValues } = slider
   return(
     <div style={wrapperStyle}>
-      <p>Number of Bars</p>
-      <Slider
-        min={10}
-        defaultValue={sliderValues}
-        marks={{
-          10: 10,
-          20: 20,
-          30: 30,
-          40: 40,
-          50: 50,
-          60: 60,
-          70: 70,
-          80: 80,
-          90: 90,
-          100: 100,
-        }}
-        onChange={handleSliderChange}
-        step={null}
-      />
+      <p style={{color: '#fff'}}>Number of Bars</p>
+
+      <div style={wrapperStyle}>
+        <Slider
+          defaultValue={sliderValues}
+          onChange={handleSliderChange}
+          min={10}
+          max={100}
+        />
+      </div>
     </div>
   )
 }
