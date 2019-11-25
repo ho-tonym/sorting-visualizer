@@ -1,32 +1,29 @@
 import React, { useEffect } from 'react'
 import './sort.min.css'
 import { Navbar, Button } from 'react-bootstrap'
-import { randomInt, resetArray, swap } from './utils'
+import { randomInt, resetArray } from './utils'
+import { swap } from './algorithms/bubbleSort'
 import { mergeSort, mergeTestSortingAlgorithms } from './algorithms/mergeSort'
 import { useStateValue } from '../../MyProvider'
 import useInterval from './hooks/useInterval'
+import { SliderContainer } from './slider'
 
-const ARRAY_BARS_COUNT = 10
 const ANIMTION_TIME = 500
-const BAR_COLOR = "#2ad19d"
-const BAR_DONE_COLOR = "#ff9f38"
-const BAR_COMPARE_COLOR = "#4d84fe"
-
 
 function SortVisualizer() {
-  const { state, setState } = useStateValue()
+  const { state, setState, slider } = useStateValue()
   const { array, comparedValues, isRunning, isSorted, permutationsToExecute } = state
+  const { sliderValues } = slider
+
   useEffect(() => {
     handleResetArray(setState)
-  }, [])
+  }, [sliderValues])
 
   useInterval(() => {
     executeAnimation()
   }, isRunning ? ANIMTION_TIME : null);
 
-  useEffect(() => {
-    console.log(state)
-  })
+
 
   function pauseResume() {
     if (permutationsToExecute.length > 0) {
@@ -38,7 +35,7 @@ function SortVisualizer() {
   }
 
   function handleResetArray() {
-    const array = resetArray(ARRAY_BARS_COUNT)
+    const array = resetArray(sliderValues)
     setState(prevState => ({
       ...prevState,
       array,
@@ -56,7 +53,11 @@ function SortVisualizer() {
         if (arr[j] > arr[j + 1]) {
           swap(arr, j, j + 1);
           permutationsToExecuteArray.push([
-            j, j + 1,
+            j, j + 1, true,
+          ])
+        }else{
+          permutationsToExecuteArray.push([
+            j, j + 1, false,
           ])
         }
       }
@@ -72,7 +73,7 @@ function SortVisualizer() {
 
   function executeAnimation() {
     permutationsToExecute.length > 0
-      ? bubbleSwapAnimation(permutationsToExecute[0][0], permutationsToExecute[0][1])
+      ? bubbleSwapAnimation(permutationsToExecute)
         :(setState(prevState => ({
           ...prevState,
           isRunning: false,
@@ -81,9 +82,17 @@ function SortVisualizer() {
         })))
   }
 
-  function bubbleSwapAnimation(j, k) {
+  function bubbleSwapAnimation(pArray) {
+    let j = pArray[0][0]
+    let k = pArray[0][1]
+    let bool = pArray[0][2]
+
     const tempArray = array.slice()
-    const value = swap(tempArray, j, k)
+    let value = tempArray
+    if (bool) {
+      value = swap(tempArray, j, k)
+    }
+
     setState(prevState => ({
       ...prevState,
       array: value,
@@ -92,6 +101,9 @@ function SortVisualizer() {
     }))
   }
 //
+function handleSliderChange() {
+  // debugger
+}
 
   return (
     <>
@@ -101,9 +113,9 @@ function SortVisualizer() {
             key={id}
             style={{
               backgroundColor:
-              `${isSorted ? BAR_DONE_COLOR
-                  : id === comparedValues[0] || id === comparedValues[1] ? BAR_COMPARE_COLOR
-                      : !isRunning ? BAR_COLOR : BAR_COLOR
+              `${isSorted ? "#ff9f38"
+                  : id === comparedValues[0] || id === comparedValues[1] ? "#4d84fe"
+                      : !isRunning ? "#2ad19d" : "#2ad19d"
               }`,
               height: `${value}px`,
             }}
@@ -111,6 +123,9 @@ function SortVisualizer() {
         ))
       }
       </div>
+
+
+
       <Navbar fixed="bottom" bg="dark" expand="lg">
         <Button variant="primary" onClick={() => handleResetArray(setState)}>Reset Array</Button>
         <Button variant="primary"
@@ -131,6 +146,7 @@ function SortVisualizer() {
         <Button variant="primary" onClick={() => pauseResume()}>
           {permutationsToExecute.length <= 0 || permutationsToExecute.length > 0 && isRunning ? "Pause" : "Resume"}
         </Button>
+        <SliderContainer handleSliderChange={handleSliderChange}/>
       </Navbar>
     </>
   )

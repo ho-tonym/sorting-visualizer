@@ -10,11 +10,17 @@ export const MyProvider = (props) => {
     comparedValues: [],
   })
 
+  const [slider, setSlider] = useState({
+    sliderValues: 10,
+  })
+
   return (
     <MyContext.Provider
       value={{
         state,
         setState,
+        slider,
+        setSlider
       }}
     >
       {props.children}
