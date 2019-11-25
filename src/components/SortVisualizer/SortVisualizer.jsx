@@ -4,7 +4,6 @@ import { Navbar, Button } from 'react-bootstrap'
 import { randomInt, resetArray, swap } from './utils'
 import { mergeSort, mergeTestSortingAlgorithms } from './algorithms/mergeSort'
 import { useStateValue } from '../../MyProvider'
-// import { bubbleSort, mergeSort } from './algorithms'
 import useInterval from './hooks/useInterval'
 
 const ARRAY_BARS_COUNT = 10
@@ -25,31 +24,21 @@ function SortVisualizer() {
     executeAnimation()
   }, isRunning ? ANIMTION_TIME : null);
 
-  // useEffect(() => {
-  //   if(isRunning && permutationsToExecute){
-  //     let interval = setInterval(executeAnimation, 1000);
-  //   }
-  //   // return () => clearInterval(interval);
-  // });
-
   useEffect(() => {
     console.log(state)
   })
 
-  // comparednumbers dont update
-  // and it keeps going. even when it hits 0
-
-
   function pauseResume() {
-    setState(prevState => ({
-      ...prevState,
-      isRunning: !prevState.isRunning,
-    }))
+    if (permutationsToExecute.length > 0) {
+      setState(prevState => ({
+        ...prevState,
+        isRunning: !prevState.isRunning,
+      }))
+    }
   }
 
   function handleResetArray() {
     const array = resetArray(ARRAY_BARS_COUNT)
-    // clearInterval(interval);
     setState(prevState => ({
       ...prevState,
       array,
@@ -72,7 +61,7 @@ function SortVisualizer() {
         }
       }
     }
-        // debugger
+
     setState(prevState => ({
       ...prevState,
       permutationsToExecute: permutationsToExecuteArray,
@@ -80,7 +69,7 @@ function SortVisualizer() {
     }))
   }
 
-  //PUT BACK
+
   function executeAnimation() {
     permutationsToExecute.length > 0
       ? bubbleSwapAnimation(permutationsToExecute[0][0], permutationsToExecute[0][1])
@@ -92,12 +81,9 @@ function SortVisualizer() {
         })))
   }
 
-  //PUT BACK
   function bubbleSwapAnimation(j, k) {
-    // debugger
     const tempArray = array.slice()
     const value = swap(tempArray, j, k)
-
     setState(prevState => ({
       ...prevState,
       array: value,
@@ -142,7 +128,9 @@ function SortVisualizer() {
           Bubble Sort
         </Button>
         <Button variant="primary" onClick={() => mergeTestSortingAlgorithms()}>Test Function</Button>
-        <Button variant="primary" onClick={() => pauseResume()}>PAUSE</Button>
+        <Button variant="primary" onClick={() => pauseResume()}>
+          {permutationsToExecute.length <= 0 || permutationsToExecute.length > 0 && isRunning ? "Pause" : "Resume"}
+        </Button>
       </Navbar>
     </>
   )
