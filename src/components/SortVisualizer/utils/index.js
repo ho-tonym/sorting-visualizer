@@ -11,3 +11,18 @@ export function arraysEqual(array1, array2) {
   }
   return true;
 }
+
+export function resetArray(count) {
+  const array = []
+  for (let i = 0; i < count; i++) {
+    array.push(randomInt(5, 400))
+  }
+  return array
+}
+
+export function swap(array, j, k) {
+  const tempElement = array[j];
+  array[j] = array[k];
+  array[k] = tempElement;
+  return array
+}

@@ -1,4 +1,4 @@
-import { randomInt, arraysEqual } from '../helperFunctions'
+import { randomInt, arraysEqual } from '../../utils'
 
 export const mergeSort = array => {
   const arrayCopy = [...array];
