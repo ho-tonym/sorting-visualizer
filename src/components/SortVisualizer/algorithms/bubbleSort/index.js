@@ -1,12 +1,7 @@
-export function swap(array, j, k) {
-  const tempElement = array[j];
-  array[j] = array[k];
-  array[k] = tempElement;
-  return array
-}
+import { swap } from '../../utils'
 
-export function bubbleSort(array, setState) {
-  const arr = array.slice()
+export const bubbleSort = (array, setState) => {
+  const arr = [...array]
   const animationArray = []
   for (let i = 0; i < arr.length; i++) {
     for (let j = 0, stop = arr.length - i; j < stop; j++) {
@@ -24,26 +19,24 @@ export function bubbleSort(array, setState) {
       }
     }
   }
-  setState(prevState => ({
-    ...prevState,
+  setState(prevState => ({ ...prevState,
     animationArray,
     isRunning: true,
   }))
 }
 
-export function bubbleSwapAnimation(setState, pArray, array) {
+export const executeBubbleAnim = (setState, pArray, array) => {
   const j = pArray[0][0]
   const k = pArray[0][1]
   const bool = pArray[0][2]
 
-  const tempArray = array.slice()
+  const tempArray = [...array]
   let value = tempArray
   if (bool) {
     value = swap(tempArray, j, k)
   }
 
-  setState(prevState => ({
-    ...prevState,
+  setState(prevState => ({ ...prevState,
     array: value,
     animationArray: prevState.animationArray.slice(1),
     comparedValues: [j, k, bool],

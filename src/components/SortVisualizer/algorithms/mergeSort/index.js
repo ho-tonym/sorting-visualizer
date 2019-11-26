@@ -1,6 +1,4 @@
-import { randomInt, arraysEqual } from '../../utils'
-
-export const mergeSort = array => {
+export const mergeSort = (array, setState) => {
   const arrayCopy = [...array];
   if (arrayCopy.length <= 1) {
     // console.log(array)
@@ -11,34 +9,61 @@ export const mergeSort = array => {
   const left = arrayCopy.slice(0, middle);
   const right = arrayCopy.slice(middle);
 
-  return mergeHelper(mergeSort(left), mergeSort(right));
-
+  // let result = await mergeHelper(setState, mergeSort(left), mergeSort(right));
+  mergeHelper(setState, mergeSort(left), mergeSort(right));
+  // setState(prevState => ({ ...prevState,
+  //   isRunning: true,
+  // }))
+  // console.log(ARRAY)
 };
-
-const mergeHelper = (left, right) => {
-  const results = [];
+let ARRAY = []
+const mergeHelper = (setState, left, right) => {
+  console.log(left,right)
+  const animationArray = [];
   while (left.length && right.length) { //check if either are 0 (falsey)
     if (left[0] <= right[0]) {
-      results.push(left.shift());
+      animationArray.push(left.shift());
+      ARRAY.push(left.shift());
     }
     else {
-      results.push(right.shift());
+      animationArray.push(right.shift());
+      ARRAY.push(right.shift());
     }
   }
-  return results.concat(left, right);
+  // setState(prevState => ({ ...prevState,
+  //   animationArray: [...prevState.animationArray, ...animationArray]
+  // }))
+  ARRAY.concat(left, right);
+  return animationArray.concat(left, right);
 };
-
-
-
-export function mergeTestSortingAlgorithms() {
-  for (let i = 0; i < 100; i++) {
-    const array = [];
-    const length = randomInt(1, 1000);
-    for (let i = 0; i < length; i++) {
-      array.push(randomInt(-1000, 1000));
-    }
-    const jsMergeSortFunc = array.slice().sort((a, b) => a - b);
-    const myMergeSortFunc = mergeSort(array.slice());
-    console.log(arraysEqual(jsMergeSortFunc, myMergeSortFunc));
-  }
-}
+//
+// export const executeMergeAnim = (setState, pArray, array) => {
+//   const j = pArray[0][0]
+//   const k = pArray[0][1]
+//   const bool = pArray[0][2]
+//
+//   const tempArray = [...array]
+//   let value = tempArray
+//   if (bool) {
+//
+//     if (j[0] <= k[0]) {
+//       animationArray.push(j.shift());
+//     }
+//     else {
+//       animationArray.push(k.shift());
+//     }
+//
+//   return animationArray.concat(left, right);
+//
+//     value = swap(tempArray, j, k)
+//   }
+//
+//   setState(prevState => ({ ...prevState,
+//     array: value,
+//     animationArray: prevState.animationArray.slice(1),
+//     comparedValues: [j, k, bool],
+//   }))
+// }
+//
+//
+//

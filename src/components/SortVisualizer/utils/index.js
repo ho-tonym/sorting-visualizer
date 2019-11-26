@@ -6,6 +6,13 @@ function resetArray(count) {
   return array
 }
 
+export const swap = (array, j, k) => {
+  const tempElement = array[j];
+  array[j] = array[k];
+  array[k] = tempElement;
+  return array
+}
+
 export function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }

@@ -6,10 +6,11 @@ import { useStateValue } from '../../MyProvider'
 import useInterval from './hooks/useInterval'
 import { SliderContainer } from './slider'
 
-import { bubbleSort, bubbleSwapAnimation } from './algorithms/bubbleSort'
+import { bubbleSort, executeBubbleAnim } from './algorithms/bubbleSort'
+import { selectionSort, executeSelectAnim } from './algorithms/selectionSort'
 import { mergeSort } from './algorithms/mergeSort'
 
-const ANIMTION_TIME = 100
+const ANIMTION_TIME = 1000
 
 function SortVisualizer() {
   const { state, setState, slider } = useStateValue()
@@ -20,23 +21,26 @@ function SortVisualizer() {
     handleResetArray(setState, sliderValues)
   }, [sliderValues])
 
+  // useEffect(() => {
+  //   console.log(state)
+  // })
+
   useInterval(() => {
-    if (animationArray.length <= 0) {
-      (setState(prevState => ({
-        ...prevState,
+    if (animationArray.length > 0) {
+      // executeBubbleAnim(setState, animationArray, array)
+      executeSelectAnim(setState, animationArray, array)
+    } else {
+      setState(prevState => ({ ...prevState,
         isRunning: false,
         isSorted: true,
         comparedValues: [],
-      })))
-    }else{
-      bubbleSwapAnimation(setState, animationArray, array)
+      }))
     }
   }, isRunning ? ANIMTION_TIME : null);
 
   function pauseResume() {
     if (animationArray.length > 0) {
-      setState(prevState => ({
-        ...prevState,
+      setState(prevState => ({ ...prevState,
         isRunning: !prevState.isRunning,
       }))
     }
@@ -54,7 +58,7 @@ function SortVisualizer() {
                 : id === comparedValues[0] && !comparedValues[2] ? "#ff9f38"
                   : id === comparedValues[1] && !comparedValues[2] ? "#ff9f38"
                     : id === comparedValues[0] || id === comparedValues[1] ? "#4d84fe"
-                      : !isRunning ? "#2ad19d" : "#2ad19d"
+                      : "#2ad19d"
               }`,
               height: `${value}px`,
             }}
@@ -70,8 +74,8 @@ function SortVisualizer() {
           Reset
         </Button>
         <Button variant="primary"
-          onClick={() => setState(prevState => ({
-            ...prevState, array: mergeSort(array)
+          onClick={() => setState(prevState => ({ ...prevState,
+            array: mergeSort(array, setState)
           }))}
         >
           Merge Sort
@@ -80,6 +84,12 @@ function SortVisualizer() {
           onClick={() => { bubbleSort(array, setState) }}
         >
           Bubble Sort
+        </Button>
+
+        <Button variant="primary"
+          onClick={() => { selectionSort(array, setState) }}
+        >
+          Select Sort
         </Button>
 
         <Button variant="primary" onClick={() => pauseResume()}>
