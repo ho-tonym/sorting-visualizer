@@ -3,7 +3,7 @@ import Slider from 'rc-slider/lib/Slider';
 import 'rc-slider/assets/index.css';
 import { useStateValue } from '../../../MyProvider'
 
-const wrapperStyle = { width: 400, margin: 50 };
+const wrapperStyle = { width: '100%', margin: 10 };
 
 export const SliderContainer = () => {
   const { slider, setSlider } = useStateValue()
@@ -13,17 +13,16 @@ export const SliderContainer = () => {
   }
   const { sliderValues } = slider
   return(
-    <div style={wrapperStyle}>
-      <p style={{color: '#fff'}}>Number of Bars</p>
-
-      <div style={wrapperStyle}>
-        <Slider
-          defaultValue={sliderValues}
-          onChange={handleSliderChange}
-          min={10}
-          max={100}
-        />
-      </div>
+    <div className="slider" style={wrapperStyle}>
+      <p style={{color: '#fff'}}>
+      Number of Bars
+      </p>
+      <Slider
+        defaultValue={sliderValues}
+        onChange={handleSliderChange}
+        min={10}
+        max={100}
+      />
     </div>
   )
 }

@@ -4,7 +4,7 @@ export const MyContext = createContext();
 export const MyProvider = (props) => {
   const [state, setState] = useState({
     array: [],
-    permutationsToExecute: [],
+    animationArray: [],
     isSorted: false,
     isRunning: false,
     comparedValues: [],

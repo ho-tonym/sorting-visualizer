@@ -1,3 +1,11 @@
+function resetArray(count) {
+  const array = []
+  for (let i = 0; i < count; i++) {
+    array.push(randomInt(5, 400))
+  }
+  return array
+}
+
 export function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -12,10 +20,13 @@ export function arraysEqual(array1, array2) {
   return true;
 }
 
-export function resetArray(count) {
-  const array = []
-  for (let i = 0; i < count; i++) {
-    array.push(randomInt(5, 400))
-  }
-  return array
+export function handleResetArray(setState, sliderValues) {
+  const array = resetArray(sliderValues)
+  setState(prevState => ({
+    ...prevState,
+    array,
+    isSorted: false,
+    isRunning: false,
+    comparedValues: [],
+  }))
 }
