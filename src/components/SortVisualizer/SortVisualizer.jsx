@@ -6,11 +6,12 @@ import { useStateValue } from '../../MyProvider'
 import useInterval from './hooks/useInterval'
 import { SliderContainer } from './slider'
 
-import { bubbleSort, executeBubbleAnim } from './algorithms/bubbleSort'
-import { selectionSort, executeSelectAnim } from './algorithms/selectionSort'
+import { bubbleSort } from './algorithms/bubbleSort'
+import { selectionSort } from './algorithms/selectionSort'
 import { mergeSort } from './algorithms/mergeSort'
+import { executeAnim } from './algorithms'
 
-const ANIMTION_TIME = 1000
+const ANIMTION_TIME = 100
 
 function SortVisualizer() {
   const { state, setState, slider } = useStateValue()
@@ -28,7 +29,7 @@ function SortVisualizer() {
   useInterval(() => {
     if (animationArray.length > 0) {
       // executeBubbleAnim(setState, animationArray, array)
-      executeSelectAnim(setState, animationArray, array)
+      executeAnim(setState, animationArray, array)
     } else {
       setState(prevState => ({ ...prevState,
         isRunning: false,

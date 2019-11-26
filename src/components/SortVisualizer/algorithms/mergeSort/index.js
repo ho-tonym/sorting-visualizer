@@ -1,3 +1,5 @@
+import { swap } from '../../utils'
+
 export const mergeSort = (array, setState) => {
   const arrayCopy = [...array];
   if (arrayCopy.length <= 1) {
