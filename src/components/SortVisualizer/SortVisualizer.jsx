@@ -11,7 +11,7 @@ import { selectionSort } from './algorithms/selectionSort'
 import { mergeSort } from './algorithms/mergeSort'
 import { executeAnim } from './algorithms'
 
-const ANIMTION_TIME = 100
+const ANIMTION_TIME = 1000
 
 function SortVisualizer() {
   const { state, setState, slider } = useStateValue()
@@ -22,9 +22,9 @@ function SortVisualizer() {
     handleResetArray(setState, sliderValues)
   }, [sliderValues])
 
-  // useEffect(() => {
-  //   console.log(state)
-  // })
+  useEffect(() => {
+    console.log(animationArray)
+  })
 
   useInterval(() => {
     if (animationArray.length > 0) {

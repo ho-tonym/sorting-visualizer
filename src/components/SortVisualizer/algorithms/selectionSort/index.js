@@ -7,22 +7,20 @@ export const selectionSort = (array, setState) => {
   for (let i = 0; i < length; i++) {
     let min = i;
     for (let j = i + 1; j < length; j++) {
-
       if (arr[min] > arr[j]) {
         min = j;
-        animationArray.push([
-          min, j, false,
+        animationArray.push([ // new low
+          j - 1, j, false,
         ])
-        //new low
       } else {
-        animationArray.push([
+        animationArray.push([ // move along
           min, j, false,
         ])
       }
     }
     if (min !== i) {
       swap(arr, i, min)
-      animationArray.push([
+      animationArray.push([ // swap at end
         min, i, true,
       ])
     }
