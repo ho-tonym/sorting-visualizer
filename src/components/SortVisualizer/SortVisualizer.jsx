@@ -9,9 +9,10 @@ import { SliderContainer } from './slider'
 import { bubbleSort } from './algorithms/bubbleSort'
 import { selectionSort } from './algorithms/selectionSort'
 import { mergeSort } from './algorithms/mergeSort'
+import { insertionSort } from './algorithms/insertionSort'
 import { executeAnim } from './algorithms'
 
-const ANIMTION_TIME = 1000
+const ANIMTION_TIME = 500
 
 function SortVisualizer() {
   const { state, setState, slider } = useStateValue()
@@ -74,13 +75,7 @@ function SortVisualizer() {
         >
           Reset
         </Button>
-        <Button variant="primary"
-          onClick={() => setState(prevState => ({ ...prevState,
-            array: mergeSort(array, setState)
-          }))}
-        >
-          Merge Sort
-        </Button>
+
         <Button variant="primary"
           onClick={() => { bubbleSort(array, setState) }}
         >
@@ -91,6 +86,12 @@ function SortVisualizer() {
           onClick={() => { selectionSort(array, setState) }}
         >
           Select Sort
+        </Button>
+
+        <Button variant="primary"
+          onClick={() => { insertionSort(array, setState) }}
+        >
+          Insert Sort
         </Button>
 
         <Button variant="primary" onClick={() => pauseResume()}>
@@ -105,4 +106,11 @@ function SortVisualizer() {
   )
 }
         // <Button variant="primary" onClick={() => mergeTestSortingAlgorithms()}>Test Function</Button>
+        // <Button variant="primary"
+        //   onClick={() => setState(prevState => ({ ...prevState,
+        //     array: mergeSort(array, setState)
+        //   }))}
+        // >
+        //   Merge Sort
+        // </Button>
 export default SortVisualizer

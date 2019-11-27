@@ -1,4 +1,9 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SORT smallest to largest
+
+bubble : compare with each element next to it and swap if it is smaller until it is in the correct spot. so we end up with the largest on the right
+
+selection: go through the array, find the smallest one and swap it with the next element in order in the iteration
+
 
 ## Available Scripts
 
