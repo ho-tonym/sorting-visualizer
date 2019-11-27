@@ -25,23 +25,22 @@ function heapify(array, i) {
   }
 }
 
-let i;
-
-export const heapSort = (arr, setState) => {
-  const array = [...arr]
-  length = array.length;
+export const heapSort = (array, setState) => {
+  const arr = [...array]
+  let a;
+  length = arr.length;
   animationArray = []
-  //build max heap
+  // build max heap
   for (let i = Math.floor(length / 2); i >= 0; i -= 1) {
-    heapify(array, i);
+    heapify(arr, i);
   }
 
-  for (i = array.length - 1; i > 0; i--) {
-    swap(array, 0, i);
-    animationArray.push([0, i, true])
+  for (a = arr.length - 1; a > 0; a--) {
+    swap(arr, 0, a);
+    animationArray.push([0, a, true])
     length--;
 
-    heapify(array, 0);
+    heapify(arr, 0);
   }
 
   setState(prevState => ({ ...prevState,

@@ -4,7 +4,7 @@ export const insertionSort = (array, setState) => {
   const animationArray = []
 
   for (let i = 0; i < length; i++) {
-    let element = arr[i];
+    const element = arr[i];
     let j;
 
     for (j = i - 1; j >= 0 && arr[j] > element; j--) {

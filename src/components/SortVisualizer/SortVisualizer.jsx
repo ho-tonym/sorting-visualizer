@@ -25,7 +25,7 @@ function SortVisualizer() {
   }, [sliderValues])
 
   useEffect(() => {
-    console.log(animationArray)
+    // console.log(animationArray)
   })
 
   useInterval(() => {
@@ -61,7 +61,7 @@ function SortVisualizer() {
                 : id === comparedValues[0] && !comparedValues[2] ? "#ff9f38"
                   : id === comparedValues[1] && !comparedValues[2] ? "#ff9f38"
                     : id === comparedValues[0] || id === comparedValues[1] ? "#4d84fe"
-                      : "#2ad19d"
+                      : "#636363"
               }`,
               height: `${value}px`,
             }}
