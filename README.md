@@ -4,6 +4,12 @@ bubble : compare with each element next to it and swap if it is smaller until it
 
 selection: go through the array, find the smallest one and swap it with the next element in order in the iteration
 
+insert:
+
+heap:
+
+
+
 
 ## Available Scripts
 

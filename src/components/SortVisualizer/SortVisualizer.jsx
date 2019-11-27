@@ -10,9 +10,10 @@ import { bubbleSort } from './algorithms/bubbleSort'
 import { selectionSort } from './algorithms/selectionSort'
 import { mergeSort } from './algorithms/mergeSort'
 import { insertionSort } from './algorithms/insertionSort'
+import { heapSort } from './algorithms/heapSort'
 import { executeAnim } from './algorithms'
 
-const ANIMTION_TIME = 500
+const ANIMTION_TIME = 100
 
 function SortVisualizer() {
   const { state, setState, slider } = useStateValue()
@@ -69,37 +70,45 @@ function SortVisualizer() {
       }
       </div>
 
-      <Navbar fixed="bottom" bg="dark" expand="lg">
-        <Button variant="primary"
-          onClick={() => handleResetArray(setState, sliderValues)}
-        >
-          Reset
-        </Button>
+      <Navbar className="nav justify-content-between" fixed="bottom" bg="dark" expand="lg">
+        <div>
+          <Button variant="primary"
+            onClick={() => handleResetArray(setState, sliderValues)}
+          >
+            Reset
+          </Button>
 
-        <Button variant="primary"
-          onClick={() => { bubbleSort(array, setState) }}
-        >
-          Bubble Sort
-        </Button>
+          <Button variant="primary" onClick={() => pauseResume()}>
+            {animationArray.length <= 0
+              || animationArray.length > 0
+                && isRunning ? "Pause" : "Resume"}
+          </Button>
+        </div>
+        <div>
+          <Button variant="primary"
+            onClick={() => { bubbleSort(array, setState) }}
+          >
+            Bubble Sort
+          </Button>
 
-        <Button variant="primary"
-          onClick={() => { selectionSort(array, setState) }}
-        >
-          Select Sort
-        </Button>
+          <Button variant="primary"
+            onClick={() => { selectionSort(array, setState) }}
+          >
+            Select Sort
+          </Button>
 
-        <Button variant="primary"
-          onClick={() => { insertionSort(array, setState) }}
-        >
-          Insert Sort
-        </Button>
+          <Button variant="primary"
+            onClick={() => { insertionSort(array, setState) }}
+          >
+            Insert Sort
+          </Button>
 
-        <Button variant="primary" onClick={() => pauseResume()}>
-          {animationArray.length <= 0
-            || animationArray.length > 0
-              && isRunning ? "Pause" : "Resume"}
-        </Button>
-
+          <Button variant="primary"
+            onClick={() => { heapSort(array, setState) }}
+          >
+            Heap Sort
+          </Button>
+        </div>
         <SliderContainer />
       </Navbar>
     </>
