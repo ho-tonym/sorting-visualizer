@@ -7,3 +7,4 @@
 
 
 //difference between export const and export function?
+//insert, heap may need to have extra animations added to it.
