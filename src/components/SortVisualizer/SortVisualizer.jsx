@@ -71,29 +71,10 @@ function SortVisualizer() {
       <ButtonToolbar className="justify-content-between">
         <ButtonGroup>
           <DropdownButton as={ButtonGroup} title="Pick a Sorting Algorithm" id="bg-nested-dropdown">
-            <Button variant="primary"
-              onClick={() => { bubbleSort(array, setState) }}
-            >
-              Bubble Sort
-            </Button>
-
-            <Button variant="primary"
-              onClick={() => { selectionSort(array, setState) }}
-            >
-              Select Sort
-            </Button>
-
-            <Button variant="primary"
-              onClick={() => { insertionSort(array, setState) }}
-            >
-              Insert Sort
-            </Button>
-
-            <Button variant="primary"
-              onClick={() => { heapSort(array, setState) }}
-            >
-              Heap Sort
-            </Button>
+            <Dropdown.Item onClick={() => { bubbleSort(array, setState) }}>Bubble Sort</Dropdown.Item>
+            <Dropdown.Item onClick={() => { selectionSort(array, setState) }}>Select Sort</Dropdown.Item>
+            <Dropdown.Item onClick={() => { insertionSort(array, setState) }}>Insert Sort</Dropdown.Item>
+            <Dropdown.Item onClick={() => { heapSort(array, setState) }}>Heap Sort</Dropdown.Item>
           </DropdownButton>
           <Button variant="primary"
             onClick={() => handleResetArray(setState, sliderValues)}
