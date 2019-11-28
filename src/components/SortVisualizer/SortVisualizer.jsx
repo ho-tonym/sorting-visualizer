@@ -17,8 +17,8 @@ function SortVisualizer() {
   const { state, setState, slider } = useStateValue()
   const { array, comparedValues, isRunning, isSorted, animationArray } = state
   const { sliderValues } = slider
-  const speed = 600 - Math.pow(array.length, 2) > 0 ? 600 - Math.pow(array.length, 2) : 0;
-
+  const speed = 600 - Math.pow(array.length / 2, 2) > 0 ? 600 - Math.pow(array.length / 2, 2) : 0;
+  const width = Math.floor(1000 / (array.length * 2))
   useEffect(() => {
     handleResetArray(setState, sliderValues)
   }, [sliderValues])
@@ -35,10 +35,6 @@ function SortVisualizer() {
       }))
     }
   }, isRunning ? speed : null);
-
-// 10 => 100
-// 10 => 500
-// 100 => 10
 
   function pauseResume() {
     if (animationArray.length > 0) {
@@ -63,6 +59,7 @@ function SortVisualizer() {
                       : "#636363"
               }`,
               height: `${value}px`,
+              width: `${width}px`
             }}
           />
         ))}
