@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import './sort.min.css'
-import { Navbar, Button } from 'react-bootstrap'
+import { Navbar, Button, ButtonGroup, Dropdown, DropdownButton, ButtonToolbar } from 'react-bootstrap'
 import { handleResetArray } from './utils'
 import { useStateValue } from '../../MyProvider'
 import useInterval from './hooks/useInterval'
@@ -13,20 +13,15 @@ import { insertionSort } from './algorithms/insertionSort'
 import { heapSort } from './algorithms/heapSort'
 import { executeAnim } from './algorithms'
 
-const ANIMTION_TIME = 100
-
 function SortVisualizer() {
   const { state, setState, slider } = useStateValue()
   const { array, comparedValues, isRunning, isSorted, animationArray } = state
   const { sliderValues } = slider
+  const speed = 600 - Math.pow(array.length, 2) > 0 ? 600 - Math.pow(array.length, 2) : 0;
 
   useEffect(() => {
     handleResetArray(setState, sliderValues)
   }, [sliderValues])
-
-  useEffect(() => {
-    // console.log(animationArray)
-  })
 
   useInterval(() => {
     if (animationArray.length > 0) {
@@ -39,7 +34,11 @@ function SortVisualizer() {
         comparedValues: [],
       }))
     }
-  }, isRunning ? ANIMTION_TIME : null);
+  }, isRunning ? speed : null);
+
+// 10 => 100
+// 10 => 500
+// 100 => 10
 
   function pauseResume() {
     if (animationArray.length > 0) {
@@ -66,60 +65,60 @@ function SortVisualizer() {
               height: `${value}px`,
             }}
           />
-        ))
-      }
+        ))}
       </div>
 
-      <Navbar className="nav justify-content-between" fixed="bottom" bg="dark" expand="lg">
-        <div>
+      <ButtonToolbar className="justify-content-between">
+        <ButtonGroup>
+          <DropdownButton as={ButtonGroup} title="Pick a Sorting Algorithm" id="bg-nested-dropdown">
+            <Button variant="primary"
+              onClick={() => { bubbleSort(array, setState) }}
+            >
+              Bubble Sort
+            </Button>
+
+            <Button variant="primary"
+              onClick={() => { selectionSort(array, setState) }}
+            >
+              Select Sort
+            </Button>
+
+            <Button variant="primary"
+              onClick={() => { insertionSort(array, setState) }}
+            >
+              Insert Sort
+            </Button>
+
+            <Button variant="primary"
+              onClick={() => { heapSort(array, setState) }}
+            >
+              Heap Sort
+            </Button>
+          </DropdownButton>
           <Button variant="primary"
             onClick={() => handleResetArray(setState, sliderValues)}
           >
             Reset
           </Button>
-
           <Button variant="primary" onClick={() => pauseResume()}>
             {animationArray.length <= 0
               || animationArray.length > 0
                 && isRunning ? "Pause" : "Resume"}
           </Button>
-        </div>
-        <div>
-          <Button variant="primary"
-            onClick={() => { bubbleSort(array, setState) }}
-          >
-            Bubble Sort
-          </Button>
-
-          <Button variant="primary"
-            onClick={() => { selectionSort(array, setState) }}
-          >
-            Select Sort
-          </Button>
-
-          <Button variant="primary"
-            onClick={() => { insertionSort(array, setState) }}
-          >
-            Insert Sort
-          </Button>
-
-          <Button variant="primary"
-            onClick={() => { heapSort(array, setState) }}
-          >
-            Heap Sort
-          </Button>
-        </div>
-        <SliderContainer />
-      </Navbar>
+        </ButtonGroup>
+        <ButtonGroup>
+          <SliderContainer />
+        </ButtonGroup>
+      </ButtonToolbar>
     </>
   )
 }
-        // <Button variant="primary" onClick={() => mergeTestSortingAlgorithms()}>Test Function</Button>
-        // <Button variant="primary"
-        //   onClick={() => setState(prevState => ({ ...prevState,
-        //     array: mergeSort(array, setState)
-        //   }))}
-        // >
-        //   Merge Sort
-        // </Button>
+// <Button variant="primary" onClick={() => mergeTestSortingAlgorithms()}>Test Function</Button>
+// <Button variant="primary"
+//   onClick={() => setState(prevState => ({ ...prevState,
+//     array: mergeSort(array, setState)
+//   }))}
+// >
+//   Merge Sort
+// </Button>
 export default SortVisualizer
