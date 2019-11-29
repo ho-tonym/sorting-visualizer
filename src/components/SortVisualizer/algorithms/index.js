@@ -1,3 +1,9 @@
-export { bubbleSort } from './bubbleSort';
-export { mergeSort } from './mergeSort';
+export { getBubbleSortAnim } from './bubbleSort';
+export { getHeapSortAnim } from './heapSort'
+export { getSelectSortAnim } from './selectionSort'
+export { getInsertSortAnim } from './insertionSort'
+export { getMergeSortAnim } from './mergeSort'
+
+
+// export { mergeSort } from './mergeSort';
 export { executeAnim } from './animation/executeAnim'

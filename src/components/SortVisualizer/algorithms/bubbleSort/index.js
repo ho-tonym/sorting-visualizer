@@ -1,6 +1,6 @@
 import { swap } from '../../utils'
 
-export const bubbleSort = (array, setState) => {
+export const getBubbleSortAnim = (array) => {
   const arr = [...array]
   const animationArray = []
   for (let i = 0; i < arr.length; i++) {
@@ -19,8 +19,5 @@ export const bubbleSort = (array, setState) => {
       }
     }
   }
-  setState(prevState => ({ ...prevState,
-    animationArray,
-    isRunning: true,
-  }))
+  return animationArray
 }

@@ -1,24 +1,34 @@
-import React, { useEffect } from 'react'
-import './sort.min.css'
-import { Navbar, Button, ButtonGroup, Dropdown, DropdownButton, ButtonToolbar } from 'react-bootstrap'
-import { handleResetArray } from './utils'
-import { useStateValue } from '../../MyProvider'
-import useInterval from './hooks/useInterval'
-import { SliderContainer } from './slider'
+import React, { useEffect } from "react";
+import "./sort.min.css";
+import {
+  Button,
+  ButtonGroup,
+  Dropdown,
+  DropdownButton,
+  ButtonToolbar,
+} from "react-bootstrap";
+import { handleResetArray } from "./utils";
+import { useStateValue } from "../../MyProvider";
+import useInterval from "./hooks/useInterval";
+import { SliderContainer } from "./slider";
+import {
+  getMergeSortAnim,
+  getBubbleSortAnim,
+  getHeapSortAnim,
+  getSelectSortAnim,
+  getInsertSortAnim,
+  executeAnim,
+} from "./algorithms";
 
-import { bubbleSort } from './algorithms/bubbleSort'
-import { selectionSort } from './algorithms/selectionSort'
-import { mergeSort } from './algorithms/mergeSort'
-import { insertionSort } from './algorithms/insertionSort'
-import { heapSort } from './algorithms/heapSort'
-import { executeAnim } from './algorithms'
 
 function SortVisualizer() {
-  const { state, setState, slider } = useStateValue()
-  const { array, comparedValues, isRunning, isSorted, animationArray } = state
-  const { sliderValues } = slider
-  const speed = 600 - Math.pow(array.length / 2, 2) > 0 ? 600 - Math.pow(array.length / 2, 2) : 0;
-  const width = Math.floor(1000 / (array.length * 2))
+  const { state, setState, slider } = useStateValue();
+  const { array, comparedValues, isRunning, isSorted, animationArray } = state;
+  const { sliderValues } = slider;
+  const speed = 600 - Math.pow(array.length / 2, 2) > 0
+    ? 600 - Math.pow(array.length / 2, 2)
+    : 0;
+  const width = Math.floor(1000 / (array.length * 2));
   useEffect(() => {
     handleResetArray(setState, sliderValues)
   }, [sliderValues])
@@ -55,8 +65,8 @@ function SortVisualizer() {
               `${isSorted ? "#ff6e8d"
                 : id === comparedValues[0] && !comparedValues[2] ? "#ff9f38"
                   : id === comparedValues[1] && !comparedValues[2] ? "#ff9f38"
-                    : id === comparedValues[0] || id === comparedValues[1] ? "#4d84fe"
-                      : "#636363"
+                    : id === comparedValues[0] || id === comparedValues[1]
+                      ? "#4d84fe" : "#636363"
               }`,
               height: `${value}px`,
               width: `${width}px`
@@ -68,10 +78,41 @@ function SortVisualizer() {
       <ButtonToolbar className="justify-content-between">
         <ButtonGroup>
           <DropdownButton as={ButtonGroup} title="Pick a Sorting Algorithm" id="bg-nested-dropdown">
-            <Dropdown.Item onClick={() => { bubbleSort(array, setState) }}>Bubble Sort</Dropdown.Item>
-            <Dropdown.Item onClick={() => { selectionSort(array, setState) }}>Select Sort</Dropdown.Item>
-            <Dropdown.Item onClick={() => { insertionSort(array, setState) }}>Insert Sort</Dropdown.Item>
-            <Dropdown.Item onClick={() => { heapSort(array, setState) }}>Heap Sort</Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                setState(prevState => ({ ...prevState, animationArray: getMergeSortAnim(array), isRunning: true }))
+              }}
+            >
+              Merge Sort
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                setState(prevState => ({ ...prevState, animationArray: getBubbleSortAnim(array), isRunning: true }))
+              }}
+            >
+              Bubble Sort
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                setState(prevState => ({ ...prevState, animationArray: getSelectSortAnim(array), isRunning: true }))
+              }}
+            >
+              Select Sort
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                setState(prevState => ({ ...prevState, animationArray: getInsertSortAnim(array), isRunning: true }))
+              }}
+            >
+              Insert Sort
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                setState(prevState => ({ ...prevState, animationArray: getHeapSortAnim(array), isRunning: true }))
+              }}
+            >
+              Heap Sort
+            </Dropdown.Item>
           </DropdownButton>
           <Button variant="primary"
             onClick={() => handleResetArray(setState, sliderValues)}

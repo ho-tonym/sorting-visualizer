@@ -1,6 +1,6 @@
 import { swap } from '../../utils'
 
-export const selectionSort = (array, setState) => {
+export const getSelectSortAnim = (array) => {
   const arr = [...array]
   const length = arr.length;
   const animationArray = []
@@ -25,8 +25,5 @@ export const selectionSort = (array, setState) => {
       ])
     }
   }
-  setState(prevState => ({ ...prevState,
-    animationArray,
-    isRunning: true,
-  }))
+  return animationArray
 }

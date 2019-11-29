@@ -25,7 +25,7 @@ function heapify(array, i) {
   }
 }
 
-export const heapSort = (array, setState) => {
+export const getHeapSortAnim = (array) => {
   const arr = [...array]
   let a;
   length = arr.length;
@@ -43,8 +43,5 @@ export const heapSort = (array, setState) => {
     heapify(arr, 0);
   }
 
-  setState(prevState => ({ ...prevState,
-    animationArray,
-    isRunning: true,
-  }))
+  return animationArray
 }

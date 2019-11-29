@@ -1,4 +1,4 @@
-export const insertionSort = (array, setState) => {
+export const getInsertSortAnim = (array) => {
   const arr = [...array]
   const length = arr.length;
   const animationArray = []
@@ -17,8 +17,5 @@ export const insertionSort = (array, setState) => {
     arr[j + 1] = element;
   }
 
-  setState(prevState => ({ ...prevState,
-    animationArray,
-    isRunning: true,
-  }))
+  return animationArray
 };
