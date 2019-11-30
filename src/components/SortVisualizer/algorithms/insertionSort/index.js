@@ -11,7 +11,6 @@ export const getInsertSortAnim = (array) => {
       arr[j + 1] = arr[j];
       animationArray.push([
         j + 1, j, true,
-        // j, j+1 , i
       ])
     }
     arr[j + 1] = element;

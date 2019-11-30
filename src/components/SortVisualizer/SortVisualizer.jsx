@@ -7,12 +7,12 @@ import {
   DropdownButton,
   ButtonToolbar,
 } from "react-bootstrap";
-import { handleResetArray } from "./utils";
+import { resetArray } from "./utils";
 import { useStateValue } from "../../MyProvider";
 import useInterval from "./hooks/useInterval";
 import { SliderContainer } from "./slider";
 import {
-  getMergeSortAnim,
+  startMergeSort,
   getBubbleSortAnim,
   getHeapSortAnim,
   getSelectSortAnim,
@@ -25,13 +25,18 @@ function SortVisualizer() {
   const { state, setState, slider } = useStateValue();
   const { array, comparedValues, isRunning, isSorted, animationArray } = state;
   const { sliderValues } = slider;
-  const speed = 600 - Math.pow(array.length / 2, 2) > 0
-    ? 600 - Math.pow(array.length / 2, 2)
-    : 0;
+  // const speed = 600 - Math.pow(array.length / 2, 2) > 0
+  //   ? 600 - Math.pow(array.length / 2, 2)
+  //   : 0;
+  const speed = 10
   const width = Math.floor(1000 / (array.length * 2));
   useEffect(() => {
-    handleResetArray(setState, sliderValues)
+    handleResetArray(sliderValues)
   }, [sliderValues])
+
+  // useEffect(() => {
+  //   console.log(state)
+  // })
 
   useInterval(() => {
     if (animationArray.length > 0) {
@@ -45,6 +50,16 @@ function SortVisualizer() {
       }))
     }
   }, isRunning ? speed : null);
+
+  function handleResetArray(count) {
+    setState(prevState => ({
+      ...prevState,
+      array: resetArray(count),
+      isSorted: false,
+      isRunning: false,
+      comparedValues: [],
+    }))
+  }
 
   function pauseResume() {
     if (animationArray.length > 0) {
@@ -80,7 +95,7 @@ function SortVisualizer() {
           <DropdownButton as={ButtonGroup} title="Pick a Sorting Algorithm" id="bg-nested-dropdown">
             <Dropdown.Item
               onClick={() => {
-                setState(prevState => ({ ...prevState, animationArray: getMergeSortAnim(array), isRunning: true }))
+                setState(prevState => ({ ...prevState, animationArray: startMergeSort(array), isRunning: true }))
               }}
             >
               Merge Sort
@@ -115,7 +130,7 @@ function SortVisualizer() {
             </Dropdown.Item>
           </DropdownButton>
           <Button variant="primary"
-            onClick={() => handleResetArray(setState, sliderValues)}
+            onClick={() => handleResetArray(sliderValues)}
           >
             Reset
           </Button>
@@ -132,12 +147,5 @@ function SortVisualizer() {
     </>
   )
 }
-// <Button variant="primary" onClick={() => mergeTestSortingAlgorithms()}>Test Function</Button>
-// <Button variant="primary"
-//   onClick={() => setState(prevState => ({ ...prevState,
-//     array: mergeSort(array, setState)
-//   }))}
-// >
-//   Merge Sort
-// </Button>
+
 export default SortVisualizer

@@ -1,4 +1,4 @@
-function resetArray(count) {
+export function resetArray(count) {
   const array = []
   for (let i = 0; i < count; i++) {
     array.push(randomInt(5, 400))
@@ -26,15 +26,4 @@ export function arraysEqual(array1, array2) {
     }
   }
   return true;
-}
-
-export function handleResetArray(setState, sliderValues) {
-  const array = resetArray(sliderValues)
-  setState(prevState => ({
-    ...prevState,
-    array,
-    isSorted: false,
-    isRunning: false,
-    comparedValues: [],
-  }))
 }
