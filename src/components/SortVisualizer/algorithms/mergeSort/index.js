@@ -4,6 +4,7 @@ export function startMergeSort(arr) {
   if (arr.length <= 1) return arr;
   tempArray = [...arr]
   let array = [...arr]
+  animationArray = []
   mergeSortHelper(array, 0, array.length - 1)
   // return array
   return animationArray
