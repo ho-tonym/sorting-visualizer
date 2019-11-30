@@ -1,30 +1,24 @@
 let tempArray = []
 let animationArray = []
+
 export function startMergeSort(arr) {
   if (arr.length <= 1) return arr;
-  tempArray = [...arr]
+  let tempArray = [...arr]
   let array = [...arr]
   animationArray = []
   mergeSortHelper(array, 0, array.length - 1)
-  // return array
   return animationArray
 }
 
 function mergeSortHelper(array, leftStart, rightEnd) {
-  if (leftStart === rightEnd) {
-    // console.log("return" + leftStart)
-    return
-  }
+  if (leftStart === rightEnd) return
   const middle = Math.floor((leftStart + rightEnd) / 2);
-  // console.log(array, leftStart, rightEnd)
   mergeSortHelper(array, leftStart, middle)
   mergeSortHelper(array, middle + 1, rightEnd)
   doMerge(array, leftStart, rightEnd)
-
 }
 
 function doMerge(array, leftStart, rightEnd) {
-  // console.log(array, leftStart, rightEnd)
   let leftEnd = Math.floor((rightEnd + leftStart) / 2);
   let rightStart = leftEnd + 1
   let size = rightEnd - leftStart + 1
@@ -44,7 +38,7 @@ function doMerge(array, leftStart, rightEnd) {
     index++
   }
 
-  //copy from tempArray back into array
+
   arraycopy(array, left, tempArray, index, leftEnd - left + 1)
   arraycopy(array, right, tempArray, index, rightEnd - right + 1)
   arraycopy(tempArray, leftStart, array, leftStart, size)
