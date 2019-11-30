@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/ho-tonym/sorting-visualizer/static/css/main.436a0b95.chunk.css",
+    "main.js": "/ho-tonym/sorting-visualizer/static/js/main.d1a75657.chunk.js",
+    "main.js.map": "/ho-tonym/sorting-visualizer/static/js/main.d1a75657.chunk.js.map",
+    "runtime-main.js": "/ho-tonym/sorting-visualizer/static/js/runtime-main.c44803df.js",
+    "runtime-main.js.map": "/ho-tonym/sorting-visualizer/static/js/runtime-main.c44803df.js.map",
+    "static/css/2.33ccad55.chunk.css": "/ho-tonym/sorting-visualizer/static/css/2.33ccad55.chunk.css",
+    "static/js/2.2c3991a2.chunk.js": "/ho-tonym/sorting-visualizer/static/js/2.2c3991a2.chunk.js",
+    "static/js/2.2c3991a2.chunk.js.map": "/ho-tonym/sorting-visualizer/static/js/2.2c3991a2.chunk.js.map",
+    "index.html": "/ho-tonym/sorting-visualizer/index.html",
+    "precache-manifest.a6227e8cc3274353cf11e4b835bef715.js": "/ho-tonym/sorting-visualizer/precache-manifest.a6227e8cc3274353cf11e4b835bef715.js",
+    "service-worker.js": "/ho-tonym/sorting-visualizer/service-worker.js",
+    "static/css/2.33ccad55.chunk.css.map": "/ho-tonym/sorting-visualizer/static/css/2.33ccad55.chunk.css.map",
+    "static/css/main.436a0b95.chunk.css.map": "/ho-tonym/sorting-visualizer/static/css/main.436a0b95.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c44803df.js",
+    "static/css/2.33ccad55.chunk.css",
+    "static/js/2.2c3991a2.chunk.js",
+    "static/css/main.436a0b95.chunk.css",
+    "static/js/main.d1a75657.chunk.js"
+  ]
+}
