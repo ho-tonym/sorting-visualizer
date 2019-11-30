@@ -40,7 +40,6 @@ function SortVisualizer() {
 
   useInterval(() => {
     if (animationArray.length > 0) {
-      // executeBubbleAnim(setState, animationArray, array)
       executeAnim(setState, animationArray, array)
     } else {
       setState(prevState => ({ ...prevState,
