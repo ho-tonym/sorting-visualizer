@@ -12,7 +12,7 @@ export default function useInterval(callback, delay) {
       savedCB.current();
     }
     if (delay !== null) {
-      let intervalId = setInterval(executeCallback, delay);
+      const intervalId = setInterval(executeCallback, delay);
       return () => clearInterval(intervalId);
     }
   }, [delay]);

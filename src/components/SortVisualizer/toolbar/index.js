@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import './toolbar.min.css'
 // import PropTypes from 'prop-types'
 import {
   Button,
@@ -9,15 +10,8 @@ import {
 } from "react-bootstrap";
 import { useStateValue } from "../../../MyProvider"
 import { SliderContainer } from "./slider";
-import {
-  getMergeSortAnim,
-  getQuickSortAnim,
-  getBubbleSortAnim,
-  getHeapSortAnim,
-  getSelectSortAnim,
-  getInsertSortAnim,
-  executeAnim,
-} from "../../../algorithms";
+import { algorithms } from './data/algo'
+import { executeAnim } from "../../../algorithms";
 import { resetArray } from "../../../utils"
 import useInterval from "../../../hooks/useInterval";
 
@@ -70,65 +64,25 @@ function Toolbar() {
     }))
   }
 
-  function handleResetArray(count) {
-    setState(prevState => ({
-      ...prevState,
-      array: resetArray(count),
-      isSorted: false,
-      isRunning: false,
-      comparedValues: [],
-    }))
-  }
-
   return (
     <ButtonToolbar className="justify-content-between">
       <ButtonGroup>
         <DropdownButton as={ButtonGroup} title="Pick a Sorting Algorithm" id="bg-nested-dropdown">
-          <Dropdown.Item
-            onClick={() => { doSetState(getMergeSortAnim) }}
-          >
-            Merge Sort
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => { doSetState(getQuickSortAnim) }}
-          >
-            Quick Sort
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {
-              doSetState(getBubbleSortAnim)
-            }}
-          >
-            Bubble Sort
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {
-              doSetState(getSelectSortAnim)
-            }}
-          >
-            Select Sort
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {
-              doSetState(getInsertSortAnim)
-            }}
-          >
-            Insert Sort
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {
-              doSetState(getHeapSortAnim)
-            }}
-          >
-            Heap Sort
-          </Dropdown.Item>
+          {algorithms.map(e => (
+            <Dropdown.Item
+              onClick={() => { doSetState(e.algo) }}
+              key={e.title}
+            >
+              {e.title}
+            </Dropdown.Item>
+          ))}
         </DropdownButton>
         <Button variant="primary"
           onClick={() => handleResetArray(sliderValues)}
         >
           Reset
         </Button>
-        <Button variant="primary" onClick={() => pauseResume()}>
+        <Button variant="primary" onClick={pauseResume}>
           {animationArray.length <= 0 || (animationArray.length > 0
               && isRunning) ? "Pause" : "Resume"}
         </Button>

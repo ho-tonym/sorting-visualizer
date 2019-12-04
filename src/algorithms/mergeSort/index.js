@@ -4,7 +4,7 @@ let animationArray = []
 export function getMergeSortAnim(arr) {
   const length = arr.length
   if (length <= 1) return arr;
-  let tempArray = [...arr]
+  tempArray = [...arr]
   let array = [...arr]
   animationArray = []
 
