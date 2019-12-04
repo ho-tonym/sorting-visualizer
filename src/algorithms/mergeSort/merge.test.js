@@ -1,12 +1,12 @@
-import { getBubbleSortAnim } from './index'
+import { getMergeSortAnim } from './index'
 import { arraysEqual, resetArray } from "../../utils"
 import { swapOrAssign } from '../animation/executeAnim'
 
-it('bubble sort works! (returns animations which sort an array)', () => {
+it('merge sort works!', () => {
   const array = resetArray(50)
   const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
 
-  const animArray = getBubbleSortAnim(array)
+  const animArray = getMergeSortAnim(array)
   const arr = [...array]
 
 
