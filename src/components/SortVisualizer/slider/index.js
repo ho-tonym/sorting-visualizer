@@ -1,7 +1,8 @@
 import React from 'react';
 import Slider from 'rc-slider/lib/Slider';
-import 'rc-slider/assets/index.css';
 import { useStateValue } from '../../../MyProvider'
+import 'rc-slider/assets/index.css';
+import './slider.min.css'
 
 export const SliderContainer = () => {
   const { slider, setSlider } = useStateValue()

@@ -23,8 +23,14 @@ function heapify(array, i) {
     ])
     heapify(array, max);
   }
+  // else{
+  //   animationArray.push([
+  //     i, max, false,
+  //   ])
+  // }
 }
 
+//build max heap`
 export const getHeapSortAnim = (array) => {
   const arr = [...array]
   let a;

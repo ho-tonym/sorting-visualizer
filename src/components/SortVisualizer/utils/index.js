@@ -1,3 +1,7 @@
+export function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 export function resetArray(count) {
   const array = []
   for (let i = 0; i < count; i++) {
@@ -12,10 +16,6 @@ export const swap = (array, j, k) => {
   array[j] = array[k];
   array[k] = tempElement;
   return array
-}
-
-export function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export function arraysEqual(array1, array2) {

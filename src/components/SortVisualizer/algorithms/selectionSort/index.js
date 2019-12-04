@@ -9,18 +9,18 @@ export const getSelectSortAnim = (array) => {
     for (let j = i + 1; j < length; j++) {
       if (arr[min] > arr[j]) {
         min = j;
-        animationArray.push([ // new low
+        animationArray.push([
           j - 1, j, false,
         ])
       } else {
-        animationArray.push([ // move along
+        animationArray.push([
           min, j, false,
         ])
       }
     }
     if (min !== i) {
       swap(arr, i, min)
-      animationArray.push([ // swap at end
+      animationArray.push([
         min, i, true,
       ])
     }

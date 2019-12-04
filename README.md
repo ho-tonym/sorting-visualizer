@@ -10,9 +10,24 @@ On^2
 
 selection: go through the array, find the smallest one and swap it with the next element in order in the iteration
 
-insert:
+insert: start left ot right. compare each item to its left, if there is an element on the left. if the current number is smaller than the number on the left it will be swapped, and keep going until it is inserted in the correct position.
 
-heap:
+
+
+heap: ordered binary tree. max heap has restrition: value of parent nodes are greater than value of child nodes
+
+we continually create max heaps to find the largest item. we remove that item from the heap and into a sorted partition
+we swap the largest item with the item at the end and assume its sorted. we remove it from the tree/ array
+
+call heapify because thats the item that is out of place. that number moves floats down. 1 floats down and the lasrgest number floats to top.
+now we have max heap again and we swap it with the last 2nd to last element
+
+(2 swaps) - at the end when in position, or when we are heapifying
+
+O(nlogn)
+build max heap = O(n)
+heapify = O(logn) called n-1 times
+------
 
 quick: good for large datasets. recursion, divide and conquer
 worst - o^n2

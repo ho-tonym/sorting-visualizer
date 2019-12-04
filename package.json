@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Sorting visualizer!",
   "private": true,
-  "homepage": "https://github.com/ho-tonym/sorting-visualizer",
+  "homepage": "https://ho-tonym.github.io/sorting-visualizer/",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "gh-pages": "^2.1.1",

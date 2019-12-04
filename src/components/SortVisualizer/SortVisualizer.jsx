@@ -12,7 +12,8 @@ import { useStateValue } from "../../MyProvider";
 import useInterval from "./hooks/useInterval";
 import { SliderContainer } from "./slider";
 import {
-  startMergeSort,
+  getMergeSortAnim,
+  getQuickSortAnim,
   getBubbleSortAnim,
   getHeapSortAnim,
   getSelectSortAnim,
@@ -20,22 +21,21 @@ import {
   executeAnim,
 } from "./algorithms";
 
-
 function SortVisualizer() {
   const { state, setState, slider } = useStateValue();
   const { array, comparedValues, isRunning, isSorted, animationArray } = state;
   const { sliderValues } = slider;
-  // const speed = 600 - Math.pow(array.length / 2, 2) > 0
-  //   ? 600 - Math.pow(array.length / 2, 2)
-  //   : 0;
-  const speed = 10
+  const speed = 600 - (array.length / 2) ** 2 > 0
+    ? 600 - (array.length * 0.55) ** 2
+    : 0;
+
   const width = Math.floor(1000 / (array.length * 2));
   useEffect(() => {
     handleResetArray(sliderValues)
   }, [sliderValues])
 
   // useEffect(() => {
-  //   console.log(state)
+  //   console.log(animationArray)
   // })
 
   useInterval(() => {
@@ -68,6 +68,14 @@ function SortVisualizer() {
     }
   }
 
+  function doSetState(sortingAlgo) {
+    setState(prevState => ({ ...prevState,
+      animationArray: sortingAlgo(array),
+      isRunning: true
+    }))
+  }
+
+  const [j, k, heightChange] = comparedValues || null
   return (
     <>
       <div className="sort-visualizer">
@@ -77,13 +85,12 @@ function SortVisualizer() {
             style={{
               backgroundColor:
               `${isSorted ? "#ff6e8d"
-                : id === comparedValues[0] && !comparedValues[2] ? "#ff9f38"
-                  : id === comparedValues[1] && !comparedValues[2] ? "#ff9f38"
-                    : id === comparedValues[0] || id === comparedValues[1]
-                      ? "#4d84fe" : "#636363"
+                : heightChange && (id === j || id === k) ? "#4d84fe"
+                  : id === j || id === k
+                    ? "#ff9f38" : "#636363"
               }`,
               height: `${value}px`,
-              width: `${width}px`
+              width: `${width}px`,
             }}
           />
         ))}
@@ -94,10 +101,17 @@ function SortVisualizer() {
           <DropdownButton as={ButtonGroup} title="Pick a Sorting Algorithm" id="bg-nested-dropdown">
             <Dropdown.Item
               onClick={() => {
-                setState(prevState => ({ ...prevState, animationArray: startMergeSort(array), isRunning: true }))
+                doSetState(getMergeSortAnim)
               }}
             >
               Merge Sort
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                setState(prevState => ({ ...prevState, animationArray: getQuickSortAnim(array), isRunning: true }))
+              }}
+            >
+              Quick Sort
             </Dropdown.Item>
             <Dropdown.Item
               onClick={() => {
@@ -134,9 +148,8 @@ function SortVisualizer() {
             Reset
           </Button>
           <Button variant="primary" onClick={() => pauseResume()}>
-            {animationArray.length <= 0
-              || animationArray.length > 0
-                && isRunning ? "Pause" : "Resume"}
+            {animationArray.length <= 0 || (animationArray.length > 0
+                && isRunning) ? "Pause" : "Resume"}
           </Button>
         </ButtonGroup>
         <ButtonGroup>

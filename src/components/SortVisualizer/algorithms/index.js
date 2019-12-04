@@ -2,7 +2,8 @@ export { getBubbleSortAnim } from './bubbleSort';
 export { getHeapSortAnim } from './heapSort'
 export { getSelectSortAnim } from './selectionSort'
 export { getInsertSortAnim } from './insertionSort'
-export { startMergeSort } from './mergeSort'
+export { getQuickSortAnim } from './quickSort'
+export { getMergeSortAnim } from './mergeSort'
 
 
 // export { mergeSort } from './mergeSort';
