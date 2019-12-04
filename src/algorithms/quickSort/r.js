@@ -1,4 +1,4 @@
-import { swap } from '../../utils'
+import { swap } from "../../utils"
 
 function partition(items, left, right, animationArray) {
   const pivot = items[Math.floor((right + left) / 2)] // middle element
@@ -38,8 +38,8 @@ function quickSort(array, animationArray, left = 0, right = array.length - 1) {
 }
 
 export function getQuickSortAnim(arr) {
-  let animationArray = []
-  let array = [...arr]
+  const animationArray = []
+  const array = [...arr]
   quickSort(array, animationArray)
   return animationArray
 }

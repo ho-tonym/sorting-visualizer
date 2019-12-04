@@ -1,6 +1,5 @@
 import { getBubbleSortAnim } from './index'
-import { swap, arraysEqual, resetArray } from '../../utils'
-import { executeAnim } from '../animation/executeAnim'
+import { swap, arraysEqual, resetArray } from "../../utils"
 
 it('bubble sort returns animations which sort an array', () => {
   const array = resetArray(50)

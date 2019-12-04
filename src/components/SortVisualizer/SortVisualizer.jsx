@@ -1,79 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./sort.min.css";
-import {
-  Button,
-  ButtonGroup,
-  Dropdown,
-  DropdownButton,
-  ButtonToolbar,
-} from "react-bootstrap";
-import { resetArray } from "./utils";
 import { useStateValue } from "../../MyProvider";
-import useInterval from "./hooks/useInterval";
-import { SliderContainer } from "./slider";
-import {
-  getMergeSortAnim,
-  getQuickSortAnim,
-  getBubbleSortAnim,
-  getHeapSortAnim,
-  getSelectSortAnim,
-  getInsertSortAnim,
-  executeAnim,
-} from "./algorithms";
+import Toolbar from './Toolbar'
 
 function SortVisualizer() {
-  const { state, setState, slider } = useStateValue();
-  const { array, comparedValues, isRunning, isSorted, animationArray } = state;
-  const { sliderValues } = slider;
-  const speed = 600 - (array.length / 2) ** 2 > 0
-    ? 600 - (array.length * 0.55) ** 2
-    : 0;
-
+  const { state } = useStateValue();
+  const { array, comparedValues, isSorted } = state;
   const width = Math.floor(1000 / (array.length * 2));
-  useEffect(() => {
-    handleResetArray(sliderValues)
-  }, [sliderValues])
-
-  // useEffect(() => {
-  //   console.log(animationArray)
-  // })
-
-  useInterval(() => {
-    if (animationArray.length > 0) {
-      executeAnim(setState, animationArray, array)
-    } else {
-      setState(prevState => ({ ...prevState,
-        isRunning: false,
-        isSorted: true,
-        comparedValues: [],
-      }))
-    }
-  }, isRunning ? speed : null);
-
-  function handleResetArray(count) {
-    setState(prevState => ({
-      ...prevState,
-      array: resetArray(count),
-      isSorted: false,
-      isRunning: false,
-      comparedValues: [],
-    }))
-  }
-
-  function pauseResume() {
-    if (animationArray.length > 0) {
-      setState(prevState => ({ ...prevState,
-        isRunning: !prevState.isRunning,
-      }))
-    }
-  }
-
-  function doSetState(sortingAlgo) {
-    setState(prevState => ({ ...prevState,
-      animationArray: sortingAlgo(array),
-      isRunning: true
-    }))
-  }
 
   const [j, k, heightChange] = comparedValues || null
   return (
@@ -95,67 +28,7 @@ function SortVisualizer() {
           />
         ))}
       </div>
-
-      <ButtonToolbar className="justify-content-between">
-        <ButtonGroup>
-          <DropdownButton as={ButtonGroup} title="Pick a Sorting Algorithm" id="bg-nested-dropdown">
-            <Dropdown.Item
-              onClick={() => {
-                doSetState(getMergeSortAnim)
-              }}
-            >
-              Merge Sort
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => {
-                setState(prevState => ({ ...prevState, animationArray: getQuickSortAnim(array), isRunning: true }))
-              }}
-            >
-              Quick Sort
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => {
-                setState(prevState => ({ ...prevState, animationArray: getBubbleSortAnim(array), isRunning: true }))
-              }}
-            >
-              Bubble Sort
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => {
-                setState(prevState => ({ ...prevState, animationArray: getSelectSortAnim(array), isRunning: true }))
-              }}
-            >
-              Select Sort
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => {
-                setState(prevState => ({ ...prevState, animationArray: getInsertSortAnim(array), isRunning: true }))
-              }}
-            >
-              Insert Sort
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => {
-                setState(prevState => ({ ...prevState, animationArray: getHeapSortAnim(array), isRunning: true }))
-              }}
-            >
-              Heap Sort
-            </Dropdown.Item>
-          </DropdownButton>
-          <Button variant="primary"
-            onClick={() => handleResetArray(sliderValues)}
-          >
-            Reset
-          </Button>
-          <Button variant="primary" onClick={() => pauseResume()}>
-            {animationArray.length <= 0 || (animationArray.length > 0
-                && isRunning) ? "Pause" : "Resume"}
-          </Button>
-        </ButtonGroup>
-        <ButtonGroup>
-          <SliderContainer />
-        </ButtonGroup>
-      </ButtonToolbar>
+      <Toolbar />
     </>
   )
 }

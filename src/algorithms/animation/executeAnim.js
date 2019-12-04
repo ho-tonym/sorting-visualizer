@@ -1,4 +1,4 @@
-import { swap } from '../../utils'
+import { swap } from "../../utils"
 
 export const executeAnim = (setState, pArray, array) => {
   const arr = [...array]
