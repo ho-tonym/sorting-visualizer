@@ -1,7 +1,7 @@
 import { swap } from "../../utils"
 
 let length;
-let animationArray;
+let animArray;
 
 function heapify(array, i) {
   const left = 2 * i + 1;
@@ -18,13 +18,13 @@ function heapify(array, i) {
 
   if (max !== i) {
     swap(array, i, max);
-    animationArray.push([
+    animArray.push([
       i, max, true,
     ])
     heapify(array, max);
   }
   // else{
-  //   animationArray.push([
+  //   animArray.push([
   //     i, max, false,
   //   ])
   // }
@@ -35,7 +35,7 @@ export const getHeapSortAnim = (array) => {
   const arr = [...array]
   let a;
   length = arr.length;
-  animationArray = []
+  animArray = []
   // build max heap
   for (let i = Math.floor(length / 2); i >= 0; i -= 1) {
     heapify(arr, i);
@@ -43,11 +43,11 @@ export const getHeapSortAnim = (array) => {
 
   for (a = arr.length - 1; a > 0; a--) {
     swap(arr, 0, a);
-    animationArray.push([0, a, true])
+    animArray.push([0, a, true])
     length--;
 
     heapify(arr, 0);
   }
 
-  return animationArray
+  return animArray
 }

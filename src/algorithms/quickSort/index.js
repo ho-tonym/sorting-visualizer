@@ -1,6 +1,6 @@
 import { swap } from "../../utils"
 
-let animationArray = []
+let animArray = []
 
 function partition(arr, pivot, left, right) {
   const pivotValue = arr[pivot]
@@ -8,15 +8,15 @@ function partition(arr, pivot, left, right) {
 
   for (let i = left; i < right; i++) {
     if (arr[i] < pivotValue) {
-      animationArray.push([i, partitionIndex, true])
+      animArray.push([i, partitionIndex, true])
       swap(arr, i, partitionIndex);
       partitionIndex++;
     } else{
-      animationArray.push([i, partitionIndex, false])
+      animArray.push([i, partitionIndex, false])
     }
   }
   swap(arr, right, partitionIndex);
-  animationArray.push([right, partitionIndex, true])
+  animArray.push([right, partitionIndex, true])
   return partitionIndex;
 }
 
@@ -38,7 +38,7 @@ function quickSort(arr, left = 0, right = arr.length - 1) {
 
 export function getQuickSortAnim(arr) {
   const array = [...arr]
-  animationArray = []
+  animArray = []
   quickSort(array)
-  return animationArray
+  return animArray
 }

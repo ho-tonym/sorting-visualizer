@@ -1,15 +1,15 @@
 let tempArray = []
-let animationArray = []
+let animArray = []
 
 export function getMergeSortAnim(arr) {
   const length = arr.length
   if (length <= 1) return arr;
   tempArray = [...arr]
   let array = [...arr]
-  animationArray = []
+  animArray = []
 
   mergeSortHelper(array, 0, length - 1)
-  return animationArray
+  return animArray
 }
 
 function mergeSortHelper(array, leftStart, rightEnd) {
@@ -33,11 +33,11 @@ function doMerge(array, leftStart, rightEnd) {
   while(left <= leftEnd && right <= rightEnd) {
     if (array[left] <= array[right]) {
       tempArray[index] = array[left]
-      // animationArray.push([left, array[left], false, right])
+      // animArray.push([left, array[left], false, right])
       left++
     } else {
       tempArray[index] = array[right]
-      // animationArray.push([right, array[right], false, left])
+      // animArray.push([right, array[right], false, left])
       right++
     }
     index++
@@ -51,7 +51,7 @@ function doMerge(array, leftStart, rightEnd) {
 function arrayCopy(fromArr, fromPos, toArr, toPos, length) {
   for (let i = 0; i < length; i++) {
     toArr[toPos] = fromArr[fromPos]
-    animationArray.push([fromPos, toPos, true, toArr[toPos]])
+    animArray.push([fromPos, toPos, true, toArr[toPos]])
     toPos++
     fromPos++
   }

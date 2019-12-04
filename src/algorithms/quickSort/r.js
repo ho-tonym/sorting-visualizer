@@ -1,21 +1,21 @@
 import { swap } from "../../utils"
 
-function partition(items, left, right, animationArray) {
+function partition(items, left, right, animArray) {
   const pivot = items[Math.floor((right + left) / 2)] // middle element
   let i = left // left pointer
   let j = right // right pointer
   while (i <= j) {
     while (items[i] < pivot) {
-      // animationArray.push([i, j, false])
+      // animArray.push([i, j, false])
       i++;
     }
     while (items[j] > pivot) {
-      // animationArray.push([i, j, false])
+      // animArray.push([i, j, false])
       j--;
     }
     if (i <= j) {
       swap(items, i, j); // sawpping two elements
-      animationArray.push([i, j, true])
+      animArray.push([i, j, true])
       i++;
       j--;
     }
@@ -23,10 +23,10 @@ function partition(items, left, right, animationArray) {
   return i;
 }
 
-function quickSort(array, animationArray, left = 0, right = array.length - 1) {
+function quickSort(array, animArray, left = 0, right = array.length - 1) {
   let index;
   if (array.length > 1) {
-    index = partition(array, left, right, animationArray); // index returned from partition
+    index = partition(array, left, right, animArray); // index returned from partition
     if (left < index - 1) { // more elements on the left side of the pivot
       quickSort(array, left, index - 1);
     }
@@ -38,8 +38,8 @@ function quickSort(array, animationArray, left = 0, right = array.length - 1) {
 }
 
 export function getQuickSortAnim(arr) {
-  const animationArray = []
+  const animArray = []
   const array = [...arr]
-  quickSort(array, animationArray)
-  return animationArray
+  quickSort(array, animArray)
+  return animArray
 }

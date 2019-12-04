@@ -1,11 +1,6 @@
 import { swap } from "../../utils"
 
-export const executeAnim = (setState, pArray, array) => {
-  const arr = [...array]
-  const [j, k, bool, l] = pArray[0]
-  const values = [j, k, bool]
-
-// animationArray.push([fromPos, toPos, true, toArr[toPos]])
+export function swapOrAssign(arr, pArray, j, k, bool, l) {
   if(bool) {
     if(pArray[0].length !== 3) {
       arr[j] = l
@@ -13,10 +8,18 @@ export const executeAnim = (setState, pArray, array) => {
       swap(arr, j, k)
     }
   }
+}
+
+export const executeAnim = (setState, pArray, array) => {
+  const arr = [...array]
+  const [j, k, bool, l] = pArray[0]
+  const values = [j, k, bool]
+
+  swapOrAssign(arr, pArray, j, k, bool, l)
 
   setState(prevState => ({ ...prevState,
     array: arr,
-    animationArray: prevState.animationArray.slice(1),
+    animArray: prevState.animArray.slice(1),
     comparedValues: values,
   }))
 }
