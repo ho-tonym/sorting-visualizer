@@ -38,7 +38,6 @@ function doMerge(array, leftStart, rightEnd) {
       left++
     } else {
       tempArray[index] = array[right]
-      // animArray.push([right, left, false, array[right]])
       right++
     }
     index++
