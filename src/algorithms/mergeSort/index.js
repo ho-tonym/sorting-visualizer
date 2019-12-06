@@ -31,13 +31,14 @@ function doMerge(array, leftStart, rightEnd) {
   let index = leftStart
 
   while(left <= leftEnd && right <= rightEnd) {
+    animArray.push([left, right, false, 0])
     if (array[left] <= array[right]) {
       tempArray[index] = array[left]
-      // animArray.push([left, array[left], false, right])
+      // animArray.push([right, left, false, array[left]])
       left++
     } else {
       tempArray[index] = array[right]
-      // animArray.push([right, array[right], false, left])
+      // animArray.push([right, left, false, array[right]])
       right++
     }
     index++
@@ -45,13 +46,13 @@ function doMerge(array, leftStart, rightEnd) {
 
   arrayCopy(array, left, tempArray, index, leftEnd - left + 1)
   arrayCopy(array, right, tempArray, index, rightEnd - right + 1)
-  arrayCopy(tempArray, leftStart, array, leftStart, size)
+  arrayCopy(tempArray, leftStart, array, leftStart, size, true)
 }
 
-function arrayCopy(fromArr, fromPos, toArr, toPos, length) {
+function arrayCopy(fromArr, fromPos, toArr, toPos, length, doAnim) {
   for (let i = 0; i < length; i++) {
     toArr[toPos] = fromArr[fromPos]
-    animArray.push([fromPos, toPos, true, toArr[toPos]])
+    if (doAnim) { animArray.push([fromPos, toPos, true, toArr[toPos]]) }
     toPos++
     fromPos++
   }

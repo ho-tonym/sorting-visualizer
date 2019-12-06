@@ -23,6 +23,10 @@ call heapify because thats the item that is out of place. that number moves floa
 now we have max heap again and we swap it with the last 2nd to last element
 
 (2 swaps) - at the end when in position, or when we are heapifying
+>>
+create tree from array
+rearrange parent so they are > than child nodes
+swap root with the last node and delete the last node(largest #)
 
 O(nlogn)
 build max heap = O(n)
@@ -30,6 +34,12 @@ heapify = O(logn) called n-1 times
 ------
 
 quick: good for large datasets. recursion, divide and conquer
+select a "random pivot element
+compare all elements with the pivot and swap elements to left if less and to right if greater
+- perform the same actions on left and right side elements to pivot
+- all performed on the same array, with no new arrays created
+
+
 worst - o^n2
 o n log n
 

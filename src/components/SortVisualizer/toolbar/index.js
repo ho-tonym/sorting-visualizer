@@ -26,6 +26,12 @@ function Toolbar() {
   useEffect(() => {
     handleResetArray(sliderValues)
   }, [sliderValues])
+  // const speed = 500
+  // useEffect(() => {
+  //   handleResetArray(10)
+  // }, [sliderValues])
+
+
 
   useInterval(() => {
     if (animArray.length > 0) {

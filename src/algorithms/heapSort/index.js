@@ -10,10 +10,16 @@ function heapify(array, i) {
 
   if (left < length && array[left] > array[max]) {
     max = left;
+    animArray.push([
+      i, max, false,
+    ])
   }
 
   if (right < length && array[right] > array[max]) {
     max = right;
+    animArray.push([
+      i, max, false,
+    ])
   }
 
   if (max !== i) {
@@ -22,26 +28,24 @@ function heapify(array, i) {
       i, max, true,
     ])
     heapify(array, max);
+  } else{
+    animArray.push([
+      i, max, false,
+    ])
   }
-  // else{
-  //   animArray.push([
-  //     i, max, false,
-  //   ])
-  // }
 }
 
-//build max heap`
 export const getHeapSortAnim = (array) => {
   const arr = [...array]
   let a;
   length = arr.length;
   animArray = []
-  // build max heap
+
   for (let i = Math.floor(length / 2); i >= 0; i -= 1) {
     heapify(arr, i);
   }
 
-  for (a = arr.length - 1; a > 0; a--) {
+  for (a = length - 1; a > 0; a--) {
     swap(arr, 0, a);
     animArray.push([0, a, true])
     length--;
