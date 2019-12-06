@@ -1,6 +1,5 @@
 import "./arrayBars.min.css";
 import React from 'react'
-// import PropTypes from 'prop-types'
 import { useStateValue } from "../../../MyProvider";
 
 function ArrayBars() {

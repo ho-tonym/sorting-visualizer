@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import './toolbar.min.css'
-// import PropTypes from 'prop-types'
 import {
   Button,
   ButtonGroup,
@@ -26,15 +25,6 @@ function Toolbar() {
   useEffect(() => {
     handleResetArray(sliderValues)
   }, [sliderValues])
-  // const speed = 500
-  // useEffect(() => {
-  //   handleResetArray(10)
-  // }, [sliderValues])
-
-
-  useEffect(() => {
-  console.log(state)
-  })
 
   useInterval(() => {
     if (animArray.length > 0) {
