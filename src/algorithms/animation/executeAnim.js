@@ -21,5 +21,6 @@ export const executeAnim = (setState, pArray, array) => {
     array: arr,
     animArray: prevState.animArray.slice(1),
     comparedValues: values,
+
   }))
 }

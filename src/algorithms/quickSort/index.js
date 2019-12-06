@@ -1,37 +1,36 @@
 import { swap } from "../../utils"
 
 let animArray = []
-
 function partition(arr, pivot, left, right) {
   const pivotValue = arr[pivot]
-  let partitionIndex = left
+  let pivotIndex = left
 
   for (let i = left; i < right; i++) {
     if (arr[i] < pivotValue) {
-      animArray.push([i, partitionIndex, true])
-      swap(arr, i, partitionIndex);
-      partitionIndex++;
+      animArray.push([i, pivotIndex, true])
+      swap(arr, i, pivotIndex);
+      pivotIndex++;
     } else{
-      animArray.push([i, partitionIndex, false])
+      animArray.push([i, pivotIndex, false])
     }
   }
-  swap(arr, right, partitionIndex);
-  animArray.push([right, partitionIndex, true])
-  return partitionIndex;
+  swap(arr, right, pivotIndex);
+  animArray.push([right, pivotIndex, true])
+
+  return pivotIndex;
 }
 
 
 function quickSort(arr, left = 0, right = arr.length - 1) {
   let pivot;
-  let partitionIndex;
+  let pivotIndex;
 
   if (left < right) {
     pivot = right;
-    partitionIndex = partition(arr, pivot, left, right);
+    pivotIndex = partition(arr, pivot, left, right);
 
-    // sort left and right
-    quickSort(arr, left, partitionIndex - 1);
-    quickSort(arr, partitionIndex + 1, right);
+    quickSort(arr, left, pivotIndex - 1);
+    quickSort(arr, pivotIndex + 1, right);
   }
   return arr;
 }

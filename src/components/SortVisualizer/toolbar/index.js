@@ -32,6 +32,9 @@ function Toolbar() {
   // }, [sliderValues])
 
 
+  useEffect(() => {
+  console.log(state)
+  })
 
   useInterval(() => {
     if (animArray.length > 0) {
