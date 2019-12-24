@@ -13,6 +13,7 @@ function ArrayBars() {
     <div className="array-bars">
       {array.length && array.map((value, id) => (
         <div
+          className={"transition"}
           key={id}
           style={{
             backgroundColor:
