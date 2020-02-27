@@ -1,9 +1,12 @@
-.dropdown-menu
+.dropdown-menu {
   background-color: #017aff
+}
 
-.dropdown-item
-  color: #fff
+.dropdown-item {
+  color: #fff;
   text-align: center
+}
 
-.btn-toolbar
+.btn-toolbar {
   margin: 20px 20px 0px 20px
+}

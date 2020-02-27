@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'rc-slider/lib/Slider';
 import { useStateValue } from '../../../../MyProvider'
 import 'rc-slider/assets/index.css';
-import './slider.min.css'
+import styles from './slider.module.css'
 
 export const SliderContainer = () => {
   const { slider, setSlider } = useStateValue()
@@ -13,7 +13,7 @@ export const SliderContainer = () => {
   const { sliderValues } = slider
 
   return(
-    <div className="slider">
+    <div className={styles.slider}>
       <p>
         Array Size  +  Speed
       </p>

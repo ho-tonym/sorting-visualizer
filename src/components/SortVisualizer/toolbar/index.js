@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import './toolbar.min.css'
 import {
   Button,
   ButtonGroup,
@@ -7,6 +6,7 @@ import {
   DropdownButton,
   ButtonToolbar,
 } from "react-bootstrap";
+import './toolbar.css'
 import { useStateValue } from "../../../MyProvider"
 import { SliderContainer } from "./slider";
 import { algorithms } from './data/algorithms'

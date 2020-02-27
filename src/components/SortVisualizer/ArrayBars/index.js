@@ -1,5 +1,5 @@
-import "./arrayBars.min.css";
 import React from 'react'
+import styles from "./arrayBars.module.css";
 import { useStateValue } from "../../../MyProvider";
 
 function ArrayBars() {
@@ -10,10 +10,10 @@ function ArrayBars() {
   const [j, k, isHeightChange] = comparedValues || null
 
   return (
-    <div className="array-bars">
+    <div className={styles.arrayBars}>
       {array.length && array.map((value, id) => (
         <div
-          className={"transition"}
+          className={styles.transition}
           key={id}
           style={{
             backgroundColor:

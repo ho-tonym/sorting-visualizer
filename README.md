@@ -2,6 +2,13 @@
 
 This repo was a way for me to learn more about sorting algorithms and help others understand the differences between some of the more popular ones. Feel free to play around with it!
 
+![](sortGif.gif)
+
+# Built With
+1. React, React hooks
+2. React Context API
+
+
 ## Algorithms
 - Bubble : For each element, iterate through and swap elements that are not in order. We end up with the largest element on the right side of the unsorted section at the end of each iteration.
 

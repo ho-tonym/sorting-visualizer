@@ -11,7 +11,7 @@ export const MyProvider = (props) => {
   })
 
   const [slider, setSlider] = useState({
-    sliderValues: 44,
+    sliderValues: 40,
   })
 
   return (
